@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A Hands-On Guide to Portfolio Optimization &#8212; Optimization Exploratorium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'portfolios/P2/Portfolio Optimization Implementation';</script>
+    <link rel="canonical" href="https://sidnand.github.io/Optimization Exploratorium/portfolios/P2/Portfolio Optimization Implementation.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A Theoredical Formulation of Optimizing Financial Options Trading" href="../P3/Optimizing%20Financial%20Option%20Contracts%20Theory.html" />
+    <link rel="prev" title="Decoding Portfolio Optimization" href="../P1/Portfolio%20Optimization%20Theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Optimization Exploratorium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Optimization Exploratorium
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio Optimization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../P1/Portfolio%20Optimization%20Theory.html">Decoding Portfolio Optimization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A Hands-On Guide to Portfolio Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Financial Option Contracts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../P3/Optimizing%20Financial%20Option%20Contracts%20Theory.html">A Theoredical Formulation of Optimizing Financial Options Trading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../P4/Optimizing%20Financial%20Option%20Contracts%20Implementation.html">Practically Optimizing Options Trading</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Trade Facilitation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../P5/Optimizing%20Trade%20through%20Intermediate%20Facilitation.html">The Hidden Levers of Trade: Intermediate Facilitation Explained</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium/edit/master/portfolios/P2/Portfolio Optimization Implementation.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium/issues/new?title=Issue%20on%20page%20%2Fportfolios/P2/Portfolio Optimization Implementation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/portfolios/P2/Portfolio Optimization Implementation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A Hands-On Guide to Portfolio Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-the-markowitz-model">Review of the Markowitz Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-library">Optimization Library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markowitz-function">The Markowitz Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-hands-on-guide-to-portfolio-optimization">
+<h1>A Hands-On Guide to Portfolio Optimization<a class="headerlink" href="#a-hands-on-guide-to-portfolio-optimization" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The goal of this project is to implement the Markowitz portfolio optimization model. In a previous project, I detailed the mathematical theory behind the Markowitz model. This is a continuation of that project. This document is divided into three parts. In the first part, we quickly review the Markowitz model, we will implement the model in Python. Finally, we will use the model to optimize a portfolio of assets.</p>
+</section>
+<section id="review-of-the-markowitz-model">
+<h2>Review of the Markowitz Model<a class="headerlink" href="#review-of-the-markowitz-model" title="Link to this heading">#</a></h2>
+<p>The Markowitz portfolio optimization problem is formulated as follows (Kempthorne, 2013):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \underset{w}{\text{maximize}}
+&amp; &amp; w^T R - \gamma w^T \Sigma w \\
+&amp; \text{subject to}
+&amp; &amp; w^T \bf{1} = 1
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w\)</span> is a vector of weights, <span class="math notranslate nohighlight">\(R\)</span> is a vector of expected returns, <span class="math notranslate nohighlight">\(\Sigma\)</span> is a covariance matrix and <span class="math notranslate nohighlight">\(\gamma \geq 0\)</span> is a risk aversion parameter.</p>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<section id="optimization-library">
+<h3>Optimization Library<a class="headerlink" href="#optimization-library" title="Link to this heading">#</a></h3>
+<p>We will be using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> to solve the optimization problem (scipy does not have a maximization function). This function takes as input the objective function, the initial guess, a list of ranges for each variable, and the constraints for each variable. It can also take an optional <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter, whicch is the specific optimization solver to use. By default, if no solver is specified, the function will use Broyden-Fletcher-Goldfarb-Shanno (BFGS) for unconstrained problems, SLSQP (Sequential Least Squares Quadratic Programming) for constrained problems and L-BFGS-B (Limited-memory Broyden-Fletcher-Goldfarb-Shanno with Bounds) for bound-constrained problems (SciPy). We will be doing a bound-constrained optimization, so SciPy will use the L-BFGS-B method. Below is an explanation of how these solvers work. There are other solvers available, which we will not discuss in this paper.</p>
+<p><strong>BFGS</strong>: BFSG is an iterative optimization algorithm for unconstrained nonlinear problems that efficiently finds the minimum of a smooth, scalar-valued function by approximating the inverse Hessian matrix. It iteratively updates the approximation, determining search directions, and performs line searches to converge rapidly toward the optimal solution without requiring second-order derivatives.</p>
+<p><strong>SLSQP</strong>: SLSQP is a sequential least squares programming algorithm for nonlinearly constrained optimization. It solves the problem by iteratively solving a sequence of quadratic subproblems, which approximates the original problem. It uses the gradient and Hessian of the objective function and the gradients of the constraints to determine the search direction.</p>
+<p><strong>L-BFGS-B</strong>: L-BFGS-B is similar to BFGS, but it puts constraints on the variables.</p>
+</section>
+<section id="the-markowitz-function">
+<h3>The Markowitz Function<a class="headerlink" href="#the-markowitz-function" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">spo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">markowitz</span></code> takes as input a vector of returns and a gamma parameter. It computes the covariance matrix and the average return for each asset. We then define the objective function, which would be the minimum of the negative of the objective function defined above. Then we set the inital weights of each asset to be equal and we set the bounds for each weight to be between 0 and 1. For the constraints, we setv <code class="docutils literal notranslate"><span class="pre">type</span></code> to be <code class="docutils literal notranslate"><span class="pre">eq</span></code> for equality and <code class="docutils literal notranslate"><span class="pre">fun</span></code> to be a function that when equal to 0, the constraint is satisfied. Finally we solve!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">markowitz</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">cov</span><span class="p">),</span> <span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">spo</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> library, we can download asset price data from Yahoo Finance. Using the function <code class="docutils literal notranslate"><span class="pre">yf.download(tickers,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> (yfinance), we can download the price data for a list of tickers from a start date to an end date. The function returns a pandas dataframe with the price data. I have pre-collected a dataset asset returns per month for 10 assets. One of which (the 3 month T-Bill) is a cash equivalent asset. There is also the S&amp;P 500. This is a asset which tracks the 500 largest companies in the US. It is a good proxy for the US stock market. Other 8 are assets which track the performance of various industries in the US.</p>
+<p><strong>Assets</strong></p>
+<ul class="simple">
+<li><p>3 Month T-Bill</p></li>
+<li><p>Consumer Discretionaries</p></li>
+<li><p>Health</p></li>
+<li><p>Tele-communications</p></li>
+<li><p>Finance</p></li>
+<li><p>Utilities</p></li>
+<li><p>S&amp;P 500</p></li>
+<li><p>Consumer Staples</p></li>
+<li><p>Materials</p></li>
+<li><p>Information Technology</p></li>
+<li><p>Energy</p></li>
+</ul>
+<p>Below is the pandas dataframe of the price change data for each asset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./spsector.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>t bill 3mo</th>
+      <th>consumer discretionaries</th>
+      <th>health</th>
+      <th>tele communications</th>
+      <th>finance</th>
+      <th>utilities</th>
+      <th>s&amp;p 500</th>
+      <th>consumer staples</th>
+      <th>materials</th>
+      <th>info tech</th>
+      <th>energy</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19990101</th>
+      <td>0.0436</td>
+      <td>0.062901</td>
+      <td>0.003816</td>
+      <td>0.095310</td>
+      <td>0.016585</td>
+      <td>-0.046136</td>
+      <td>0.041009</td>
+      <td>-0.015036</td>
+      <td>-0.029418</td>
+      <td>0.158504</td>
+      <td>-0.079363</td>
+    </tr>
+    <tr>
+      <th>19990201</th>
+      <td>0.0455</td>
+      <td>0.003263</td>
+      <td>0.005552</td>
+      <td>-0.027472</td>
+      <td>0.028204</td>
+      <td>-0.025584</td>
+      <td>-0.032283</td>
+      <td>-0.031827</td>
+      <td>-0.000312</td>
+      <td>-0.120723</td>
+      <td>-0.006375</td>
+    </tr>
+    <tr>
+      <th>19990301</th>
+      <td>0.0436</td>
+      <td>0.043225</td>
+      <td>0.026045</td>
+      <td>-0.006350</td>
+      <td>0.026524</td>
+      <td>-0.012413</td>
+      <td>0.038794</td>
+      <td>-0.016764</td>
+      <td>0.025186</td>
+      <td>0.091734</td>
+      <td>0.164443</td>
+    </tr>
+    <tr>
+      <th>19990401</th>
+      <td>0.0443</td>
+      <td>0.022983</td>
+      <td>-0.070525</td>
+      <td>0.022868</td>
+      <td>0.066651</td>
+      <td>0.072313</td>
+      <td>0.037944</td>
+      <td>0.013889</td>
+      <td>0.229507</td>
+      <td>-0.005706</td>
+      <td>0.155049</td>
+    </tr>
+    <tr>
+      <th>19990501</th>
+      <td>0.0451</td>
+      <td>-0.063519</td>
+      <td>-0.044478</td>
+      <td>0.005845</td>
+      <td>-0.068291</td>
+      <td>0.043578</td>
+      <td>-0.024970</td>
+      <td>-0.016008</td>
+      <td>-0.102145</td>
+      <td>-0.014789</td>
+      <td>-0.055582</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="n">asset_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">gammas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">markowitz</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">patches</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">autotexts</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">weight</span><span class="si">:</span><span class="s1">.2%</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">asset</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">asset_names</span><span class="p">,</span> <span class="n">weights</span><span class="p">)],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gamma = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gamma</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/59965d3e42961a8969d0eea57ef5b1d15b9003a6113c13e488492b64286e1d25.png" src="../../_images/59965d3e42961a8969d0eea57ef5b1d15b9003a6113c13e488492b64286e1d25.png" />
+<img alt="../../_images/fd9fd0297bea8c3da5559ad9d7b1a1dd05bf3dcd25b2f2875e2ce4f0938483c3.png" src="../../_images/fd9fd0297bea8c3da5559ad9d7b1a1dd05bf3dcd25b2f2875e2ce4f0938483c3.png" />
+<img alt="../../_images/3f7054ba2b9e033305e3628cb784dca49b98afc8e7aa103d5270ec86b5d1931a.png" src="../../_images/3f7054ba2b9e033305e3628cb784dca49b98afc8e7aa103d5270ec86b5d1931a.png" />
+<img alt="../../_images/a1146c8f70a52febe69d68a471000cb105bc2558ed8b5d8273470870cc39a3a4.png" src="../../_images/a1146c8f70a52febe69d68a471000cb105bc2558ed8b5d8273470870cc39a3a4.png" />
+<img alt="../../_images/5018dd0059d6b36cc3477a4fd5bdb8efa344769c1d4bfb339213da6b6eac692f.png" src="../../_images/5018dd0059d6b36cc3477a4fd5bdb8efa344769c1d4bfb339213da6b6eac692f.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Kempthorne, P. (2013). Lecture 14: Portfolio Theory, MIT 18.S096. Topics In Mathematics With Applications In Finance. <a class="reference external" href="https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/bba02164ba6642f7d516df35347aec01_MIT18_S096F13_lecnote14.pdf">https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/bba02164ba6642f7d516df35347aec01_MIT18_S096F13_lecnote14.pdf</a></p></li>
+<li><p>SciPy. (n.d.). scipy.optimize.minimize. <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p></li>
+<li><p>yfinance (n.d.). yfinance. <a class="reference external" href="https://pypi.org/project/yfinance/">https://pypi.org/project/yfinance/</a></p></li>
+<li><p>Nelder, J. A., &amp; Mead, R. (1965). A Simplex Method for Function Minimization. The Computer Journal, 7(4), 308–313. <a class="reference external" href="https://doi.org/10.1093/comjnl/7.4.308">https://doi.org/10.1093/comjnl/7.4.308</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./portfolios/P2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../P1/Portfolio%20Optimization%20Theory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Decoding Portfolio Optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../P3/Optimizing%20Financial%20Option%20Contracts%20Theory.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Theoredical Formulation of Optimizing Financial Options Trading</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-the-markowitz-model">Review of the Markowitz Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-library">Optimization Library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markowitz-function">The Markowitz Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Siddharth Nand
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Copyright 2024, Siddharth Nand.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

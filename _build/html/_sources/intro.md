@@ -1,0 +1,4 @@
+# Optimization Exploratorium
+
+```{tableofcontents}
+```

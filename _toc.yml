@@ -1,0 +1,19 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: Portfolio Optimization
+  chapters:
+    - file: portfolios/P1/Portfolio Optimization Theory.ipynb
+    - file: portfolios/P2/Portfolio Optimization Implementation.ipynb
+
+- caption: Financial Option Contracts
+  chapters:
+    - file: portfolios/P3/Optimizing Financial Option Contracts Theory.ipynb
+    - file: portfolios/P4/Optimizing Financial Option Contracts Implementation.ipynb
+
+- caption: Trade Facilitation
+  chapters:
+    - file: portfolios/P5/Optimizing Trade through Intermediate Facilitation.ipynb

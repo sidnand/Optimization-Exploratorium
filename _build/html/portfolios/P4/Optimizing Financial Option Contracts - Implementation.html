@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction &#8212; Optimization Exploratorium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'portfolios/P4/Optimizing Financial Option Contracts - Implementation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Optimization Exploratorium - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Optimization Exploratorium - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium/issues/new?title=Issue%20on%20page%20%2Fportfolios/P4/Optimizing Financial Option Contracts - Implementation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/portfolios/P4/Optimizing Financial Option Contracts - Implementation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-1">Case Study: Options Contract 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-2">Case Study: Options Contract 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>This is a continuation of a previous notebook titled <em>Optimizing Financial Option Contracts - Theory</em>. This notebook will cover the implementation details of optimizing financial options contracts using the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> library.</p>
+<section id="review">
+<h2>Review<a class="headerlink" href="#review" title="Link to this heading">#</a></h2>
+<p>The Black-Scholes PDE is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+C(S, t) = S_t N(d_1) - K e^{-r(T-t)} N(d_2)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C(S, t)\)</span> is the price of the call option at time <span class="math notranslate nohighlight">\(t\)</span> given the price of the underlying asset is <span class="math notranslate nohighlight">\(S\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(N(x)\)</span> is the cumulative distribution function of the standard normal distribution</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_1 = \frac{1}{\sigma \sqrt{T-t}} \left[ \ln \left( \frac{S}{K} \right) + \left( r + \frac{\sigma^2}{2} \right) (T-t) \right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_2 = d_1 - \sigma \sqrt{T-t}\)</span></p></li>
+</ul>
+<p>Optimizing black-scholes involves finding the price to buy an option at time <span class="math notranslate nohighlight">\(t\)</span> which maximizes the payoff. This can be written as:</p>
+<p>\begin{align*}
+\text{Objective:} &amp; \quad \text{Minimize}<em>{r, \sigma} \quad (C(S, t) - C</em>{\text{market}})^2 \
+\text{Subject to:} &amp; \
+&amp; C(S, t) \geq 0 \
+&amp; C_{\text{market}} \geq 0 \
+&amp; r \sim \text{Distribution of Market Interest Rates} \
+&amp; \sigma \sim \text{Distribution of Market Volatility}
+\end{align*}</p>
+<p>The goal is to check if a given options contract is underpriced or overpriced in our current economic environment. This can be done by finding the optimal values of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> that minimize the difference between the theoretical price and the market price of the option. If there is a difference between the theoretical <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> and the current <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, then this tells us that the option is either underpriced or overpriced.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementation">
+<h1>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h1>
+<section id="assumptions">
+<h2>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h2>
+<p>There are many ways we can optimize the Black-Scholes model. For this implementation, we will make the following assumptions:</p>
+<ol class="arabic simple">
+<li><p>The volatility is uniformly distributed between 0.1 and 1</p></li>
+<li><p>The interest rate parameter is uniformly distributed between 0.005 and 0.1</p></li>
+</ol>
+</section>
+<section id="objective-function">
+<h2>Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading">#</a></h2>
+<p>Options pricing optimizing is a non-concave optimization problem. CVXPY is a convex optimization library, so it is not suitable for this problem. We will use SciPy optimization library to solve this problem. Therefore, we used <code class="docutils literal notranslate"><span class="pre">SciPy</span></code> optimization library, which is more powerful and flexible than <code class="docutils literal notranslate"><span class="pre">CVXPY</span></code> for this problem.</p>
+<p>Due to the non-convex nature of this problem, <code class="docutils literal notranslate"><span class="pre">SciPy</span></code> uses Sequential Least SQuares Programming (SLSQP) to solve this problem. SLSQP iteratively approximates the objective function and constraints using quadratic models, aiming to minimize the model while satisfying constraints. It updates the solution until convergence, making it effective for nonlinear optimization problems where convex techniques may not apply.</p>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we will implement the optimization of the Black-Scholes model, which takes the current price of the underlying asset, the strike price, the time to maturity, and the market price of the option as inputs. The black-scholes model will then return the theoretical price of the option. Our objective function takes the theoretical price of the option and the market price of the option as inputs and returns the squared difference between the two. We will then use the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> function to find the optimal parameters that minimize the objective function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">black_scholes</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">option_price</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">option_price</span>
+
+<span class="k">def</span> <span class="nf">objective_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">market_price</span><span class="p">):</span>
+    <span class="n">sigma</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">params</span>
+
+    <span class="n">option_price</span> <span class="o">=</span> <span class="n">black_scholes</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">option_price</span> <span class="o">-</span> <span class="n">market_price</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h1>
+<p>Lets try this on actual options data. We will use the website <a class="reference external" href="https://www.nasdaq.com/market-activity/stocks/tsla/option-chain">https://www.nasdaq.com/market-activity/stocks/tsla/option-chain</a> to get current options data for Tesla stock. Below is a screenshot of the data we will use from the website. The circled row is the option we will use as an example.</p>
+<p><img alt="TSLA_options.png" src="../../_images/TSLA_options.png" /></p>
+<p>Below is the code which sets up the optimization problem and solves it. We first initialize a random guess for the <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> parameters. We then set the constraints that <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> to be within the range defined in our assumtions. We pass the inital guesses and our options contract data into the objective function and minimize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">market_price</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="mf">0.1</span> <span class="o">-</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+    <span class="p">]</span>
+
+    <span class="n">initial_guess_lambda_sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">initial_guess_lambda_r</span> <span class="o">=</span> <span class="mf">0.04</span>
+    <span class="n">initial_guess</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_guess_lambda_sigma</span><span class="p">,</span> <span class="n">initial_guess_lambda_r</span><span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective_function</span><span class="p">,</span> <span class="n">initial_guess</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">market_price</span><span class="p">),</span> 
+                    <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="n">optimal_lambda_sigma</span><span class="p">,</span> <span class="n">optimal_lambda_r</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimized rate parameter for sigma (lambda_sigma):&quot;</span><span class="p">,</span> <span class="n">optimal_lambda_sigma</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimized rate parameter for interest rate (lambda_r):&quot;</span><span class="p">,</span> <span class="n">optimal_lambda_r</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization failed:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="case-study-options-contract-1">
+<h1>Case Study: Options Contract 1<a class="headerlink" href="#case-study-options-contract-1" title="Link to this heading">#</a></h1>
+<p>The first options contract, highlighted in the image above, has the following parameters:</p>
+<ul class="simple">
+<li><p>Strike Price: $190</p></li>
+<li><p>Time to Maturity: April 26, 2024 (~ 1/12 years)</p></li>
+<li><p>Market Price of Call Option: $5.95 (this is the bid-price, which is the price at which the buyer is willing to buy the option at)</p></li>
+<li><p>As of Fri. Mar 28, 2024, Tesla is trading at $175, so this is the price of the underlying asset</p></li>
+</ul>
+<p>This contract states that the buyer has the right to buy Tesla stock at <span class="math notranslate nohighlight">\(190 on April 26, 2024. The buyer pays \)</span>5.95 for this right. If Tesla is trading above <span class="math notranslate nohighlight">\(190 on April 26, 2024, the buyer can exercise the option and make a profit. If Tesla is trading below \)</span>190, the buyer can let the option expire and lose the $5.95 paid for the option.</p>
+<p>We plug that information into the optimization problem and solve it below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="mi">175</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">12</span>
+<span class="n">market_price</span> <span class="o">=</span> <span class="mf">5.95</span>
+
+<span class="n">get_results</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">market_price</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized rate parameter for sigma (lambda_sigma): 0.5520447592581064
+Optimized rate parameter for interest rate (lambda_r): 0.07925645706441156
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the above, we see that the optimal <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> parameters are 0.08 and 0.55 respectively. This means that, based on our model, we should buy this option if the interest rate is 8.4% and the volatility is 57%. As of March. 2024, the US baseline interest rate is around 5%, so the model didn’t perform terribly, but to make this more realistics, we’d need better assumptions for the interest rate and volatility distributions.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="case-study-options-contract-2">
+<h1>Case Study: Options Contract 2<a class="headerlink" href="#case-study-options-contract-2" title="Link to this heading">#</a></h1>
+<p>The second options contract, highlighted in the image above, has the following parameters:</p>
+<ul class="simple">
+<li><p>Strike Price: $192.50</p></li>
+<li><p>Time to Maturity: April 19, 2024 (~ 1/24 years)</p></li>
+<li><p>Market Price of Call Option: $1.84</p></li>
+<li><p>As of Fri. Mar 28, 2024, Tesla is trading at $175, so this is the price of the underlying asset</p></li>
+</ul>
+<p>We plug that information into the optimization problem and solve it below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="mi">175</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mf">192.50</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">24</span>
+<span class="n">market_price</span> <span class="o">=</span> <span class="mf">1.84</span>
+
+<span class="n">get_results</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">market_price</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized rate parameter for sigma (lambda_sigma): 0.5021255518530079
+Optimized rate parameter for interest rate (lambda_r): 0.04028925142128283
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the above, we see that the optimal <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> parameters are 0.04 and 0.50 respectively. This means that, based on our model, we should buy this option if the interest rate is 4.0% and the volatility is 50%.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
+<p>In this report, we implemented a method to optimize financial options contracts using the Black-Scholes model and the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> library. By comparing theoretical option prices with market prices, we assessed whether options were underpriced or overpriced in the current market. Our implementation utilized the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> function with constraints on interest rates and volatilities. Through case studies on Tesla options contracts, we demonstrated the effectiveness of our approach. While our method provides a practical framework for option pricing, further refinements are needed to enhance its accuracy and realism, particularly in incorporating more nuanced assumptions for market parameters.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./portfolios/P4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-1">Case Study: Options Contract 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-2">Case Study: Options Contract 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Siddharth Nand
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

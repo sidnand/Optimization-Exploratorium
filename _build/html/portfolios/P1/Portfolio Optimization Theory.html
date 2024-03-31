@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Decoding Portfolio Optimization &#8212; Optimization Exploratorium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'portfolios/P1/Portfolio Optimization Theory';</script>
+    <link rel="canonical" href="https://sidnand.github.io/Optimization Exploratorium/portfolios/P1/Portfolio Optimization Theory.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A Hands-On Guide to Portfolio Optimization" href="../P2/Portfolio%20Optimization%20Implementation.html" />
+    <link rel="prev" title="Optimization Exploratorium" href="../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Optimization Exploratorium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Optimization Exploratorium
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio Optimization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decoding Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../P2/Portfolio%20Optimization%20Implementation.html">A Hands-On Guide to Portfolio Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Financial Option Contracts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../P3/Optimizing%20Financial%20Option%20Contracts%20Theory.html">A Theoredical Formulation of Optimizing Financial Options Trading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../P4/Optimizing%20Financial%20Option%20Contracts%20Implementation.html">Practically Optimizing Options Trading</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Trade Facilitation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../P5/Optimizing%20Trade%20through%20Intermediate%20Facilitation.html">The Hidden Levers of Trade: Intermediate Facilitation Explained</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium/edit/master/portfolios/P1/Portfolio Optimization Theory.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sidnand/Optimization-Exploratorium/issues/new?title=Issue%20on%20page%20%2Fportfolios/P1/Portfolio Optimization Theory.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/portfolios/P1/Portfolio Optimization Theory.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decoding Portfolio Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markowitz-portfolio-optimization">Markowitz Portfolio Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criticisms">Criticisms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decoding-portfolio-optimization">
+<h1>Decoding Portfolio Optimization<a class="headerlink" href="#decoding-portfolio-optimization" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The goal of this project is to learn about the foundation of financial portfolio optimization. The project is divided into three parts. In the first part, we will learn about the history of portfolio optimization. In the second part, we will learn about the theory of portfolio optimization, which includes the most well-known optimization model called Markowitz portfolio optimization. Lastly, we will talk about some criticisms of the Markowitz portfolio optimization problem.</p>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<p>Portfolio optimization has a straightforward yet impactful history, primarily rooted in the field of finance. In the 1950s and 1960s, the modern portfolio theory (MPT) emerged as a fundamental concept. Developed by economist Harry Markowitz, MPT introduced the idea that investors could construct portfolios to maximize expected returns for a given level of risk or minimize risk for a targeted level of return. Markowitz’s work laid the groundwork for understanding the benefits of diversification in investment strategies, emphasizing the importance of considering the correlation between different assets. Markowitz specifically developed a mathematical model to determine the optimal allocation of assets in a portfolio, which is now known as the Markowitz portfolio optimization problem.</p>
+</section>
+<section id="mathematical-formulation">
+<h2>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h2>
+<section id="assumptions">
+<h3>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
+<p>The Markowitz Portfolio Theory makes several assumptions, some of which from Markowitz’s original paper and some of which I added because I thought they were important. Here are the assumptions:</p>
+<ol class="arabic simple">
+<li><p><strong>Normal Distribution of Returns:</strong> The model assumes that the returns of assets are normally distributed. This assumption is crucial for the model’s reliance on mean and variance as measures of return and risk (Markowitz, 1952).</p></li>
+<li><p><strong>Investor’s Risk Aversion:</strong> The model assumes that investors are risk-averse and seek to maximize expected returns for a given level of risk. This is reflected in the use of a risk aversion parameter <span class="math notranslate nohighlight">\(\gamma\)</span> in the objective function (Markowitz, 1952).</p></li>
+<li><p><strong>Single Period Model:</strong> The model is designed for a single time period, implying that investor decisions are made without considering the future. It doesn’t account for changing economic conditions or evolving investor preferences (Markowitz, 1952).</p></li>
+<li><p><strong>Risk is Measured by Variance:</strong> The model uses variance (and standard deviation) as a measure of risk. It assumes that investors consider risk solely in terms of the variability of returns and that higher variance equates to higher risk (Markowitz, 1952).</p></li>
+<li><p><strong>Static Expected Returns:</strong> The model assumes that expected returns remain constant over the investment horizon. It doesn’t account for changes in economic conditions or market expectations that could impact future returns (Markowitz, 1952).</p></li>
+<li><p><strong>Perfectly Divisible Assets:</strong> The model assumes that assets are perfectly divisible, meaning investors can allocate any fraction of their wealth to any asset. This assumption may not hold in reality, where assets are typically bought and sold in discrete units.</p></li>
+<li><p><strong>No Transaction Costs:</strong> The model assumes that there are no transaction costs associated with buying or selling assets. In reality, transaction costs can significantly impact portfolio performance.</p></li>
+<li><p><strong>Homogeneous Expectations:</strong> All investors are assumed to have the same expectations regarding returns and risk, and they base their decisions on a common set of parameters. This assumption overlooks the diversity of investor beliefs and preferences.</p></li>
+<li><p><strong>No Taxes:</strong> The model does not consider taxes, and it assumes that investors can trade assets without incurring tax liabilities. In practice, taxes can have a substantial impact on investment decisions and portfolio performance.</p></li>
+<li><p><strong>Use of Historical Data:</strong> The model relies on historical data to estimate expected returns and the covariance matrix. It assumes that past performance is indicative of future behavior, which may not always be the case.</p></li>
+</ol>
+</section>
+<section id="markowitz-portfolio-optimization">
+<h3>Markowitz Portfolio Optimization<a class="headerlink" href="#markowitz-portfolio-optimization" title="Link to this heading">#</a></h3>
+<p>The idea behind Markowitz portfolio optimization is to find a portfolio of assets that has the highest expected return based on a given level of risk.</p>
+<p>The Markowitz portfolio optimization problem is formulated as follows (Kempthorne, 2013):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \underset{w}{\text{maximize}}
+&amp; &amp; w^T R - \gamma w^T \Sigma w \\
+&amp; \text{subject to}
+&amp; &amp; w^T \bf{1} = 1
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w\)</span> is a vector of weights, <span class="math notranslate nohighlight">\(R\)</span> is a vector of expected returns, <span class="math notranslate nohighlight">\(\Sigma\)</span> is a covariance matrix, <span class="math notranslate nohighlight">\(\gamma \geq 0\)</span> is a risk aversion parameter and <span class="math notranslate nohighlight">\(\bf{1}\)</span> is a vector of 1s. Higher gamma means the investor is less tolerant of risky assets. The objective function is the expected return minus the expected loss (risk), where the risk is defined as the variance of the portfolio. The constraint is that the sum of the weights must equal 1, which ensures that the portfolio is fully invested.</p>
+</section>
+</section>
+<section id="criticisms">
+<h2>Criticisms<a class="headerlink" href="#criticisms" title="Link to this heading">#</a></h2>
+<p>While the Markowitz model has been influential in the field of portfolio optimization, it is not without its criticisms. Here are some of the main criticisms that one might have of the Markowitz model:</p>
+<ol class="arabic simple">
+<li><p><strong>Assumption of Normality:</strong> The model assumes that returns are normally distributed. In reality, financial returns often exhibit non-normal distributions, including fat tails and skewness. This can lead to suboptimal portfolios if the actual distribution deviates significantly from the assumed normal distribution.</p></li>
+<li><p><strong>Sensitivity to Input Estimates:</strong> The model is highly sensitive to the estimates of expected returns and covariance matrix. Small changes in these inputs can lead to significant changes in the resulting portfolio. Estimating these parameters accurately is challenging, especially with limited historical data.</p></li>
+<li><p><strong>Single-Period Model:</strong> The Markowitz model is a single-period model that doesn’t account for the dynamic nature of financial markets. It assumes that expected returns and risk parameters remain constant over time, which may not hold true in practice.</p></li>
+<li><p><strong>Diversification Benefit Assumption:</strong> While diversification is a key principle in the model, the benefits of diversification may diminish during extreme market conditions or financial crises when correlations among assets tend to increase.</p></li>
+<li><p><strong>Ignoring Transaction Costs and Taxes:</strong> The model doesn’t consider transaction costs or tax implications, which are critical factors in real-world portfolio management. Frequent trading, as suggested by the model, may incur substantial costs that can significantly impact portfolio performance.</p></li>
+<li><p><strong>No Consideration for Investor Preferences:</strong> The model assumes that investors are solely risk-averse and make decisions solely based on expected return and risk. In reality, investors may have diverse preferences, including non-linear objective functions and behavioral biases that are not captured by the model.</p></li>
+<li><p><strong>Focus on Variance as a Risk Measure:</strong> The use of variance as a measure of risk implies that all types of risk are symmetric and can be adequately captured by the variance of the asset. However, investors may be concerned about other risk measures that are not considered in the Markowitz framework.</p></li>
+<li><p><strong>Inability to Handle Discrete Changes:</strong> The model assumes continuous changes in asset weights, which may not be practical in real-world scenarios where investments are typically made in discrete quantities.</p></li>
+<li><p><strong>Inability to Capture Black Swan Events:</strong> The model is not designed to handle extreme events or “Black Swan” events that may have a significant impact on the portfolio but have a low probability of occurrence.</p></li>
+<li><p><strong>Out-of-Sample Performance:</strong> The historical estimates used in the model may not accurately represent future market conditions. The model’s performance in out-of-sample periods might not be as effective as its performance in the historical estimation period.</p></li>
+</ol>
+<p>Despite these criticisms, the Markowitz model laid the foundation for modern portfolio theory, and many subsequent models have built upon its principles, attempting to address some of these limitations. Investors and practitioners often use more advanced techniques that incorporate these criticisms and provide more realistic portfolio management strategies.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Markowitz, H. (1952). Portfolio Selection. The Journal of Finance, 7(1), 77-91. <a class="reference external" href="https://doi.org/10.2307/2975974">https://doi.org/10.2307/2975974</a></p></li>
+<li><p>Kempthorne, P. (2013). Lecture 14: Portfolio Theory, MIT 18.S096. Topics In Mathematics With Applications In Finance. <a class="reference external" href="https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/bba02164ba6642f7d516df35347aec01_MIT18_S096F13_lecnote14.pdf">https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/bba02164ba6642f7d516df35347aec01_MIT18_S096F13_lecnote14.pdf</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./portfolios/P1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Optimization Exploratorium</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../P2/Portfolio%20Optimization%20Implementation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Hands-On Guide to Portfolio Optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markowitz-portfolio-optimization">Markowitz Portfolio Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criticisms">Criticisms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Siddharth Nand
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Copyright 2024, Siddharth Nand.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
