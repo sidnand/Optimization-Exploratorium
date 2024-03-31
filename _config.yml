@@ -4,7 +4,7 @@
 title: Optimization Exploratorium
 author: Siddharth Nand
 only_build_toc_files: true
-copyright: Copyright 2024, Siddharth Nand
+copyright: 2024, Siddharth Nand
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -30,7 +30,6 @@ latex:
 html:
   use_issues_button: true
   use_repository_button: true
-  use_edit_page_button: true
   home_page_in_navbar: true
   baseurl: "https://sidnand.github.io/Optimization Exploratorium"
 
