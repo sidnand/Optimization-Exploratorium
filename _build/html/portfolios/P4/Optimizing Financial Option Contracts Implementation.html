@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -182,7 +182,6 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../P3/Optimizing%20Financial%20Option%20Contracts%20Theory.html">A Theoredical Formulation of Optimizing Financial Options</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">An Implementation of Optimizing Options Trading</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Trade Facilitation</span></p>
 <ul class="nav bd-sidenav">
@@ -386,7 +385,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">An Implementation of Optimizing Options Trading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
 </ul>
@@ -397,16 +395,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-1">Case Study: Options Contract 1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-2">Case Study: Options Contract 2</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -499,9 +492,8 @@ r \sim \text{Distribution of Market Interest Rates} \\
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h1>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
 <p>Lets try this on actual options data. We will use the website <a class="reference external" href="https://www.nasdaq.com/market-activity/stocks/tsla/option-chain">https://www.nasdaq.com/market-activity/stocks/tsla/option-chain</a> to get current options data for Tesla stock. Below is a screenshot of the data we will use from the website. The circled row is the option we will use as an example.</p>
 <p><img alt="TSLA_options.png" src="../../_images/TSLA_options.png" /></p>
 <p>Below is the code which sets up the optimization problem and solves it. We first initialize a random guess for the <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> parameters. We then set the constraints that <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> to be within the range defined in our assumtions. We pass the inital guesses and our options contract data into the objective function and minimize.</p>
@@ -535,6 +527,7 @@ r \sim \text{Distribution of Market Interest Rates} \\
 </div>
 </div>
 </div>
+</section>
 <section id="case-study-options-contract-1">
 <h2>Case Study: Options Contract 1<a class="headerlink" href="#case-study-options-contract-1" title="Link to this heading">#</a></h2>
 <p>The first options contract, highlighted in the image above, has the following parameters:</p>
@@ -666,7 +659,6 @@ Optimized rate parameter for interest rate (lambda_r): 0.04028925142128283
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">An Implementation of Optimizing Options Trading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
 </ul>
@@ -677,16 +669,11 @@ Optimized rate parameter for interest rate (lambda_r): 0.04028925142128283
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-1">Case Study: Options Contract 1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-options-contract-2">Case Study: Options Contract 2</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
