@@ -17,3 +17,7 @@ parts:
 - caption: Trade Facilitation
   chapters:
     - file: portfolios/P5/Optimizing Trade through Intermediate Facilitation.ipynb
+
+- caption: Constraint Satisfaction Problems
+  chapters:
+    - file: portfolios/P6/CSP.ipynb
