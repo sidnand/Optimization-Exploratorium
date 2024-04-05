@@ -484,17 +484,19 @@ C(S, t) = S_t N(d_1) - K e^{-r(T-t)} N(d_2)
 </ul>
 <p><br><br><br></p>
 <p>The mathematical formulation is as follows:</p>
-<p>\begin{align*}
-\text{Objective:} &amp; \quad \text{Minimize} \quad (C(S, t) - C_{\text{market}})^2 \
-\text{Subject to:} &amp; \
-&amp; C(S, t) \geq 0 \
-&amp; S \geq 0 \
-&amp; K \geq 0 \
-&amp; T \geq 0 \
-&amp; C_{\text{market}} \geq 0 \
-&amp; r \sim \text{Distribution of Market Interest Rates} \
-&amp; \sigma \sim \text{Distribution of Market Volatility}
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[\text{Objective:} \quad \text{Minimize}_{r, \sigma} \quad (C(S, t) - C_{\text{market}})^2\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Subject to}\\
+C(S, t) \geq 0\\
+S \geq 0\\
+K \geq 0 \\
+T \geq 0 \\
+C_{\text{market}} \geq 0 \\
+r \sim \text{Distribution of Market Interest Rates} \\
+\sigma \sim \text{Distribution of Market Volatility}
+\end{split}\]</div>
 <p><strong>Explanation</strong></p>
 <p>This optimization framework bridges the gap between theoretical valuation and market realities:</p>
 <ul class="simple">

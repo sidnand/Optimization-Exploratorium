@@ -433,14 +433,19 @@ C(S, t) = S_t N(d_1) - K e^{-r(T-t)} N(d_2)
 <li><p><span class="math notranslate nohighlight">\(d_2 = d_1 - \sigma \sqrt{T-t}\)</span></p></li>
 </ul>
 <p>Optimizing black-scholes involves finding the price to buy an option at time <span class="math notranslate nohighlight">\(t\)</span> which maximizes the payoff. This can be written as:</p>
-<p>\begin{align*}
-\text{Objective:} &amp; \quad \text{Minimize}<em>{r, \sigma} \quad (C(S, t) - C</em>{\text{market}})^2 \
-\text{Subject to:} &amp; \
-&amp; C(S, t) \geq 0 \
-&amp; C_{\text{market}} \geq 0 \
-&amp; r \sim \text{Distribution of Market Interest Rates} \
-&amp; \sigma \sim \text{Distribution of Market Volatility}
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[\text{Objective:} \quad \text{Minimize}_{r, \sigma} \quad (C(S, t) - C_{\text{market}})^2\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Subject to}\\
+C(S, t) \geq 0\\
+S \geq 0\\
+K \geq 0 \\
+T \geq 0 \\
+C_{\text{market}} \geq 0 \\
+r \sim \text{Distribution of Market Interest Rates} \\
+\sigma \sim \text{Distribution of Market Volatility}
+\end{split}\]</div>
 <p>The goal is to check if a given options contract is underpriced or overpriced in our current economic environment. This can be done by finding the optimal values of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> that minimize the difference between the theoretical price and the market price of the option. If there is a difference between the theoretical <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> and the current <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, then this tells us that the option is either underpriced or overpriced.</p>
 </section>
 </section>
