@@ -4,6 +4,10 @@
 format: jb-book
 root: intro
 parts:
+- caption:
+  chapters:
+    - file: cover_letter.md
+
 - caption: Portfolio Optimization
   chapters:
     - file: portfolios/P1/Portfolio Optimization Theory.ipynb
@@ -18,6 +22,7 @@ parts:
   chapters:
     - file: portfolios/P5/Optimizing Trade through Intermediate Facilitation.ipynb
 
-- caption: Constraint Satisfaction Problems
+- caption: Constraint Programming
   chapters:
-    - file: portfolios/P6/CSP.ipynb
+    - file: portfolios/P6/CP.ipynb
+    - file: portfolios/P7/google_or.ipynb
