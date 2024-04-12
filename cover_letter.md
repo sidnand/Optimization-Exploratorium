@@ -2,25 +2,43 @@
 
 ## My Key Learning Outcomes
 
+My key learning outcomes were:
+
+- Developing a better understanding of mathematical optimization: the different types of optimization problems and how to represent them mathematically.
+
+- Learning about the ways mathematical optimization is applied in finance.
+
+- Developing an in-depth understanding of constraint programming.
+
+- Improving my Python programming skills in CVXPY, SciPy, and Google OR-Tools.
+
+- Enhancing my LaTeX document writing skills.
+
 ## My Artifact Creation Process
 
-My artifact creation process was in ... main parts.
+My artifact creation process comprised three main parts:
 
-1. Pick a topic I am passionate about
+1. Selecting a topic I am passionate about.
 
-2. Search the internet and consult with ChatGPT about how mathematics is used within this topic
+2. Researching how mathematics is applied within this topic on the internet.
 
-3. 
+3. Choosing a specific application problem, initially outlining the background and mathematics, and then using Python to solve the problem.
 
 ## Most Proud Artifact
 
-The artifact I am most proud of is the optimizing trade through intermediate facilitation literature summary. This artifact was quite challenging for me because the ideas in the paper were outside my knowledge base, so it was difficult to summarize the material in a detailed matter. The mathematics in that paper was not very intuitive to me, so I qdecided not to talk much about the math outside of the main optimization problem.
+The artifact I am most proud of is the optimizing trade through intermediate facilitation literature summary. This artifact was quite challenging for me because the ideas in the paper were outside my knowledge base, making it difficult to summarize the material in detail. The mathematics in that paper was not very intuitive to me, so I decided not to delve deeply into the math beyond the main optimization problem.
 
 ## Challenges in my Portfolio
 
-## Successes in my Portfolio
+My biggest challenge was coming up with good solutions to the problems addressed in my artifacts. For example, in my last artifact on the N-Queens problem, developing the mathematical solution was quite tricky. Another example is the Black-Scholes stochastic differential equation, which was challenging to explain in plain English terms, but I believe I managed to provide a clear explanation at a high level.
+
+## Enjoyable Part of my Portfolio
+
+In general, I enjoyed every aspect of the portfolio. I am very proud of the quality and detail in my artifacts. However, the most enjoyable part was learning the new material needed to write my artifacts. All my artifacts were topics I cared a lot about, so I was highly motivated to develop a high-quality portfolio.
 
 ## Portfolio Guidance to Other Students
+
+I believe the best piece of advice I can offer to other students is to work on optimization problems they are passionate about. This passion will drive motivation and contribute to the creation of a high-quality portfolio.
 
 ## Grade Proposal
 

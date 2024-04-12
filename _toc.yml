@@ -4,10 +4,6 @@
 format: jb-book
 root: intro
 parts:
-- caption:
-  chapters:
-    - file: cover_letter.md
-
 - caption: Portfolio Optimization
   chapters:
     - file: portfolios/P1/Portfolio Optimization Theory.ipynb
